@@ -1,3 +1,13 @@
+# Step 3: Train the model
+# This piece of code does the following:
+# Load pretrained weights
+# Replace heads for the custom task (classifier + mask) with number of classes.
+# Custom COCO dataset loader, optimizer, scheduler
+# Train-val loss tracking
+# Early stopping
+# Save best model/early stopping model
+# Loss plots for reporting
+
 import torchvision
 from torchvision.models.detection.mask_rcnn import MaskRCNNPredictor
 import torch
@@ -8,16 +18,6 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader
 from torchvision.models.detection import maskrcnn_resnet50_fpn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
-# Step 3: Train the model
-# This piece of code does the following:
-# Load pretrained weights
-# Replace heads for the custom task (classifier + mask) with number of classes.
-# Custom COCO dataset loader, optimizer, scheduler
-# Train-val loss tracking
-# Early stopping
-# Save best model/early stopping model
-# Loss plots for reporting
 
 # Paths
 save_path = "best_maskrcnn.pth"
