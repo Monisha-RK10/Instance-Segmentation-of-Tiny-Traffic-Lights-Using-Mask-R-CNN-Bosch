@@ -41,7 +41,7 @@ class COCOMaskRCNNDataset(torch.utils.data.Dataset):
         for ann in annotations:
             xmin, ymin, width, height = ann['bbox']
             boxes.append([xmin, ymin, xmin + width, ymin + height])
-            labels.append(ann['category_id'] + 1) # Shift labels from 0/1 to 1/2 (be careful, check if json has red=1, green=2. If classes startes from 1, then dont add 1)
+            labels.append(ann['category_id'])# + 1) # Shift labels from 0/1 to 1/2 (be careful, check if json has red=1, green=2. If classes startes from 1, then dont add 1)
             mask = self.coco.annToMask(ann)
             masks.append(mask)
 
