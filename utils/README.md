@@ -31,7 +31,7 @@ Input:
 
 Process:
 - Iterates over all images
-  - If an image belongs to the training or validation set:
+- If an image belongs to the training or validation set:
   - Assigns a new image ID
   - Maps old ID → new ID (image_id_map)
 - Updates each annotation:
