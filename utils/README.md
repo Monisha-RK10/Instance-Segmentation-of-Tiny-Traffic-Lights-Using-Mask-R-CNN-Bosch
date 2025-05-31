@@ -31,13 +31,12 @@ Input:
 
 Process:
 - Iterates over all images
-- If an image belongs to the training or validation set:
--  Assigns a new image ID
--  Maps old ID → new ID (image_id_map)
-
-Updates each annotation:
-- Keeps only relevant annotations
-- Assigns new image_id and unique id for annotation
+  - If an image belongs to the training or validation set:
+  - Assigns a new image ID
+  - Maps old ID → new ID (image_id_map)
+- Updates each annotation:
+  - Keeps only relevant annotations
+  - Assigns new image_id and unique id for annotation
 
 Output:
 - annotation_train.json
