@@ -6,7 +6,6 @@ This folder contains the dataset loader for training Mask R-CNN on the Bosch Sma
 
 ## coco_maskrcnn_dataset.py
 - **'Purpose'**:
-- Defines the COCOMaskRCNNDataset class, a custom PyTorch Dataset that:
 - Loads images and COCO-format annotations.
 - Extracts bounding boxes, labels, and binary masks for instance segmentation.
 - Returns each image and its corresponding annotations in the format expected by Mask R-CNN.
