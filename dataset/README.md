@@ -14,9 +14,9 @@ Defines the COCOMaskRCNNDataset class, a custom PyTorch Dataset that:
 **'Key Features'**:
 - Image Loading: Opens RGB images using PIL from the provided directory.
 - Annotation Parsing: Uses pycocotools to extract:
--- Bounding boxes (bbox)
--- Class labels (category_id)
--- Segmentation masks
+  -- Bounding boxes (bbox)
+  -- Class labels (category_id)
+  -- Segmentation masks
 - Empty Annotation Handling: If an image has no annotations, returns empty tensors for boxes, labels, and masks.
 - Transform Support: Accepts optional torchvision transforms.
 
