@@ -1,6 +1,6 @@
 # Step 4: Evaluation
 # This piece of code does the following:
-# a) In this setup, train & val json have 0 for red, 1 for green, i.e., "categories": [{"id": 0, "name": "Red"}, {"id": 1, "name": "Green"}]. Model was trained with 3 classes, 1 for read, 2 for green.
+# a) In this setup, train & val json have 0 for red, 1 for green, i.e., "categories": [{"id": 0, "name": "Red"}, {"id": 1, "name": "Green"}]. Model was trained with 3 classes, 1 for red, 2 for green.
 # Function 'update_category_ids', ensures that during evaluation train & val json assign 1 for red, 2 for green to match with labels in COCOMaskRCNNDataset.
 # b) Loads the pre-trained weights with model architecture.
 # c) Evaluates on val_dataset via pycocotools
