@@ -1,3 +1,11 @@
+# Step 1: Create a custom Mask R-CNN class
+# This piece of code does the following:
+# COCOMaskRCNNDataset class takes image dir, loads annotation JSON via COCO, gets a list of image IDs.
+# Loop through each image ID, get file name, open it in RGB format, & apply transform.
+# Get all annotations for that image, and load them to extract each annotation's box (xmin/max, ymin/max), label (class starts from 1 (red), 2(green)), mask.
+# If annotation empty, append '[]' & convert target to tensor.
+# Return image & target.
+
 import os
 import torch
 import torchvision.transforms as T
@@ -9,14 +17,6 @@ import os
 import random
 import numpy as np
 import torch
-
-# Step 1: Create a custom Mask R-CNN class
-# This piece of code does the following:
-# COCOMaskRCNNDataset class takes image dir, loads annotation JSON via COCO, gets a list of image IDs.
-# Loop through each image ID, get file name, open it in RGB format, & apply transform.
-# Get all annotations for that image, and load them to extract each annotation's box (xmin/max, ymin/max), label (class starts from 1 (red), 2(green)), mask.
-# If annotation empty, append '[]' & convert target to tensor.
-# Return image & target.
 
 class COCOMaskRCNNDataset(torch.utils.data.Dataset):
     def __init__(self, images_dir, annotation_json, transforms=None):
