@@ -59,7 +59,7 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 | Input | Prediction |
 |-------|------------|
-| ![](results/img_008.png) | ![](results/img_009.png) |
+| ![](results/img_009.png) | ![](results/img_013.png) |
 | ![](results/img_013.png) | ![](results/img_015.png) |
 
 ---
