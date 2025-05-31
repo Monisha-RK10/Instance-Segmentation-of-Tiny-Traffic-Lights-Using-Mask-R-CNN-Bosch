@@ -21,8 +21,8 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 # Paths
 save_path = "best_maskrcnn.pth"
-# Import COCOMaskRCNNDataset from dataset/coco_mask_dataset 
-from dataset.coco_mask_dataset import COCOMaskRCNNDataset
+# Import COCOMaskRCNNDataset from dataset/coco_maskrcnn_dataset 
+from dataset.coco_maskrcnn_dataset import COCOMaskRCNNDataset
 
 def get_mask_rcnn_model(num_classes):
     # Load a pre-trained model for COCO
