@@ -1,3 +1,7 @@
+# input/
+
+----
+
 - **`annotation_train.json`**
   JSON file for train dataset
 
