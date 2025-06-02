@@ -10,13 +10,13 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 ## Project Overview
 
-- Format: COCO-style annotations (converted via Makesense.ai).
-- Model: Torchvision's pretrained Mask R-CNN with custom heads.
-- Classes:  
+- **Format**: COCO-style annotations (converted via Makesense.ai).
+- **Model**: Torchvision's pretrained Mask R-CNN with custom heads.
+- **Classes**:  
   `1 → Red Traffic Light`,  
   `2 → Green Traffic Light`
-- Dataset Size: ~100 manually curated Bosch images.
-- Output: Segmentation masks for each instance of traffic lights.
+- **Dataset Size**: ~100 manually curated Bosch images.
+- **Output**: Segmentation masks for each instance of traffic lights.
 
 ## Evaluation: COCO Metrics (Mask R-CNN)
 
