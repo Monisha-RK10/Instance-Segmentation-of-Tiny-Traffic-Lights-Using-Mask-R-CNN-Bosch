@@ -57,11 +57,10 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 ## Sample Output Visualizations
 
-| Input | Prediction |
-|-------|------------|
-| ![](results/img_009.png) | ![](results/img_001.png) |
-| ![](results/img_013.png) | ![](results/img_015.png) |
-
+![Mask R-CNN Result](results/img_009.png)
+![Mask R-CNN Result](results/img_013.png)
+![Mask R-CNN Result](results/img_001.png)
+![Mask R-CNN Result](results/img_015.png)
 ---
 
 
