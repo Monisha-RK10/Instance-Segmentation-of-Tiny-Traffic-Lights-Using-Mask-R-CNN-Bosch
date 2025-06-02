@@ -30,9 +30,9 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 | Model           | GT Objects | Matched (IoU>0.5) | Mean IoU (SAM) | Mask AP@50 | Mask AP@50-95 |
 |---------------- |------------|-------------------|----------------|------------|---------------|
+| **YOLOv8 + SAM**| 1186       | 275               | 0.0757         | -          |-              |
 | **YOLOv8n-seg** | -          | -                 | -              |0.02        |0.0075         |
 | **YOLOv8s-seg** | -          | -                 | -              |0.07        |0.203          |
-| **YOLOv8 + SAM**| 1186       | 275               | 0.0757         | -          |               |
 | **Mask R-CNN**  | -          | -                 | -              |**0.82**    | **0.4**       |
 
  **Mask R-CNN outperforms both YOLOv8 and SAM pipelines** for instance segmentation of tiny traffic lights.
