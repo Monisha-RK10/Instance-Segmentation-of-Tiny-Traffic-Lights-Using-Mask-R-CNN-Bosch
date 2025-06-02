@@ -27,17 +27,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 ## Evaluation: COCO Metrics (Mask R-CNN)
 
-| Metric                           | Score     |
-|----------------------------------|-----------|
-| AP@[IoU=0.50:0.95] (All)         | **0.384** |
-| AP@[IoU=0.50]                    | **0.824** |
-| AP@[IoU=0.75]                    | 0.295     |
-| AP (Small Objects)               | **0.399** |
-| AP (Medium Objects)              | 0.076     |
-| AP (Large Objects)               | -1.000    |
-| AR@[IoU=0.50:0.95] (All, 100 dets) | 0.478   |
-| AR (Small)                      | 0.498     |
-
 |  AP@[IoU=0.50:0.95] (All)| AP@[IoU=0.50] | AP@[IoU=0.75]| AP (Small Objects)  | AP (Medium Objects) | AP (Large Objects) | AR@[IoU=0.50:0.95] (All, 100 dets) |  AR (Small)|
 |--------------------------|---------------|--------------|---------------------|---------------------|--------------------|------------------------------------|------------|
 |  **0.39**                |**0.82**       | 0.30         |  **0.4**            |  0.08               | -1.00              |  0.48                              |0.5         |
