@@ -40,10 +40,11 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 ## Sample Output Visualizations
 
-![Mask R-CNN Result](results/img_009.png)
-![Mask R-CNN Result](results/img_013.png)
-![Mask R-CNN Result](results/img_001.png)
-![Mask R-CNN Result](results/img_015.png)
+<img src="results/img_009.png" width="1000"/>
+<img src="results/img_013.png" width="1000"/>
+
+<img src="results/img_001.png" width="1000"/>
+<img src="results/img_015.png" width="1000"/>
 
 ## Author
 
