@@ -8,8 +8,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 > **Read the full write-up on Medium**:  
 > [Instance Segmentation of Tiny Traffic Lights using Mask R-CNN](https://medium.com/@monishatemp20/instance-segmentation-of-tiny-traffic-lights-using-mask-r-cnn-bosch-dataset-f88a8d33e1e3)
 
----
-
 ## Project Overview
 
 - Format: COCO-style annotations (converted via Makesense.ai).
@@ -20,11 +18,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 - Dataset Size: ~100 manually curated Bosch images.
 - Output: Segmentation masks for each instance of traffic lights.
 
----
-
-
----
-
 ## Evaluation: COCO Metrics (Mask R-CNN)
 
 |  AP@[IoU=0.50:0.95] (All)| AP@[IoU=0.50] | AP@[IoU=0.75]| AP (Small Objects)  | AP (Medium Objects) | AP (Large Objects) | AR@[IoU=0.50:0.95] (All, 100 dets) |  AR (Small)|
@@ -32,8 +25,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 |  **0.39**                |**0.82**       | 0.30         |  **0.4**            |  0.08               | -1.00              |  0.48                              |0.5         |
 
 > The model performs strongly on **small object segmentation**, which is critical for traffic light scenarios.
-
----
 
 ## Comparison with YOLOv8 & SAM
 
@@ -46,7 +37,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 
  **Mask R-CNN outperforms both YOLOv8 and SAM pipelines** for instance segmentation of tiny traffic lights.
 
----
 
 ## Sample Output Visualizations
 
@@ -54,8 +44,6 @@ The project tackles the challenging task of **instance segmentation** of **small
 ![Mask R-CNN Result](results/img_013.png)
 ![Mask R-CNN Result](results/img_001.png)
 ![Mask R-CNN Result](results/img_015.png)
----
-
 
 ## Author
 
