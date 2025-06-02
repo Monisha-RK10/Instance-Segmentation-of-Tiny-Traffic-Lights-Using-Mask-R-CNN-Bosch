@@ -38,6 +38,10 @@ The project tackles the challenging task of **instance segmentation** of **small
 | AR@[IoU=0.50:0.95] (All, 100 dets) | 0.478   |
 | AR (Small)                      | 0.498     |
 
+|  AP@[IoU=0.50:0.95] (All)| AP@[IoU=0.50] | AP@[IoU=0.75]| AP (Small Objects)  | AP (Medium Objects) | AP (Large Objects) | AR@[IoU=0.50:0.95] (All, 100 dets) |  AR (Small)|
+|--------------------------|---------------|--------------|---------------------|---------------------|--------------------|------------------------------------|------------|
+|  **0.39**                |**0.82**       | 0.30         |  **0.4**            |  0.08               | -1.00              |  0.48                              |0.5         |
+
 > The model performs strongly on **small object segmentation**, which is critical for traffic light scenarios.
 
 ---
