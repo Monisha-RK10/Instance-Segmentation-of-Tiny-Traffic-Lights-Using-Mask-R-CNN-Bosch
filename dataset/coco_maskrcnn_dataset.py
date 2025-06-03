@@ -21,17 +21,17 @@ import torch
 class COCOMaskRCNNDataset(torch.utils.data.Dataset):
     def __init__(self, images_dir, annotation_json, transforms=None):
         self.images_dir = images_dir
-        self.coco = COCO(annotation_json) # Passing annotation json via COCO
-        self.image_ids = list(self.coco.imgs.keys())
+        self.coco = COCO(annotation_json) # Passing annotation json via COCO (internally, indexes all images, annotations, categories, etc)
+        self.image_ids = list(self.coco.imgs.keys()) # Dictionary that returns all image_ids
         self.transforms = transforms
 
     def __getitem__(self, idx):
         image_id = self.image_ids[idx]
-        image_info = self.coco.loadImgs(image_id)[0]
+        image_info = self.coco.loadImgs(image_id)[0] # Returns image metadata (filename, size, etc.)
         image_path = os.path.join(self.images_dir, image_info['file_name'])
         image = Image.open(image_path).convert("RGB")
 
-        ann_ids = self.coco.getAnnIds(imgIds=image_id)
+        ann_ids = self.coco.getAnnIds(imgIds=image_id) # Get annotation IDs for an image
         annotations = self.coco.loadAnns(ann_ids)
 
         boxes = []
