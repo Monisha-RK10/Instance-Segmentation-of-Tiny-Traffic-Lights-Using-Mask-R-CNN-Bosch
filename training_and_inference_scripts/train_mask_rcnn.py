@@ -81,15 +81,15 @@ for epoch in range(num_epochs):
     epoch_train_loss = 0
 
     for images, targets in tqdm(train_loader,  desc=f"Epoch {epoch+1} [Train]"):
-        images = list(img.to(device) for img in images)
-        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+        images = list(img.to(device) for img in images)  # Send all images to GPU/CPU
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets] # Send all annotation values to device
 
-        loss_dict = model(images, targets)
+        loss_dict = model(images, targets)  # Forward pass -> returns a dict of losses
         loss = sum(loss for loss in loss_dict.values()) #  Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
 
-        optimizer.zero_grad() # Clears the previous gradients stored in the model’s parameters. Skipping zero_grad() would accumulate gradients from past steps (bad, unless explicitly doing gradient accumulation for large batch training).
-        loss.backward() # Performs backpropagation: calculates gradients of the loss w.r.t model parameters.
-        optimizer.step() # Updates model parameters using the gradients calculated.
+        optimizer.zero_grad() # Clear gradients from previous step
+        loss.backward() # Backpropagation: compute gradients w.r.t model params
+        optimizer.step() # Optimizer updates weights using gradients
 
         epoch_train_loss += loss.item()
 
