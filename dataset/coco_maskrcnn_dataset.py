@@ -21,7 +21,7 @@ import torch
 class COCOMaskRCNNDataset(torch.utils.data.Dataset):
     def __init__(self, images_dir, annotation_json, transforms=None):
         self.images_dir = images_dir
-        self.coco = COCO(annotation_json)
+        self.coco = COCO(annotation_json) # Passing annotation json via COCO
         self.image_ids = list(self.coco.imgs.keys())
         self.transforms = transforms
 
