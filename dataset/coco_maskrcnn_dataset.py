@@ -42,7 +42,7 @@ class COCOMaskRCNNDataset(torch.utils.data.Dataset):
             xmin, ymin, width, height = ann['bbox']
             boxes.append([xmin, ymin, xmin + width, ymin + height])
             labels.append(ann['category_id'] + 1) # Shift labels from 0/1 to 1/2 (be careful, check if json has red=1, green=2. If classes startes from 1, then dont add 1)
-            mask = self.coco.annToMask(ann)
+            mask = self.coco.annToMask(ann) # Converts a segmentation annotation (usually in polygon format) into a binary mask (2D NumPy array).
             masks.append(mask)
 
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
@@ -53,7 +53,7 @@ class COCOMaskRCNNDataset(torch.utils.data.Dataset):
             "boxes": boxes,
             "labels": labels,
             "masks": masks, # segmentation masks are binary (0 or 1).
-            "image_id": torch.tensor([image_id]),
+            "image_id": torch.tensor([image_id]), # image_id is a scalar int (e.g., 42), so wrap it with torch.tensor([image_id]) to convert it into a 1D tensor. No gradients for image_id, so requires_grad=False by default.
         }
 
         if self.transforms:
