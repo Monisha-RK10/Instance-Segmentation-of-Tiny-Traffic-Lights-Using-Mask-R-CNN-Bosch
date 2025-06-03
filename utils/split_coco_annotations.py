@@ -22,16 +22,16 @@ val_imgs = set(os.listdir(val_img_dir))
 def split_coco_json(full_data, image_names):
     new_images = []
     new_annotations = []
-    image_id_map = {}  # old_id → new_id
+    image_id_map = {}  # old_id -> new_id
     new_id = 0
     ann_id = 0
 
     for img in full_data['images']:
         if img['file_name'] in image_names:
-            image_id_map[img['id']] = new_id
-            img_copy = img.copy()
-            img_copy['id'] = new_id
-            new_images.append(img_copy)
+            image_id_map[img['id']] = new_id  # old_id -> new_id
+            img_copy = img.copy() # Don't mutate original
+            img_copy['id'] = new_id # Assign new image ID
+            new_images.append(img_copy)  # Save it
             new_id += 1
 
     for ann in full_data['annotations']:
