@@ -80,7 +80,7 @@ for epoch in range(num_epochs):
 
     for images, targets in tqdm(train_loader,  desc=f"Epoch {epoch+1} [Train]"):
         images = list(img.to(device) for img in images)  # Send all images to GPU/CPU
-        targets = [{k: v.to(device) for k, v in t.items()} for t in targets] # Send all annotation values to device
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets] # Send all annotation values to device, v is a tensor, k is a string (no .to())
 
         loss_dict = model(images, targets)  # Forward pass -> returns a dict of losses
         loss = sum(loss for loss in loss_dict.values()) #  Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
