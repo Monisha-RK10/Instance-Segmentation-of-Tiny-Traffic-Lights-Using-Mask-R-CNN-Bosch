@@ -39,11 +39,9 @@ def get_mask_rcnn_model(num_classes):
     hidden_layer = 256
     model.roi_heads.mask_predictor = MaskRCNNPredictor(
         in_features_mask, hidden_layer, num_classes # Mask prediction is spatial -> CNN + upsampling → need hidden layers.
-
     )
 
     return model
-
 
 # Setup
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -111,7 +109,6 @@ for epoch in range(num_epochs):
             model.eval()  # Switch back to eval to keep behavior consistent
 
             epoch_val_loss += loss.item()
-
 
     avg_val_loss = epoch_val_loss / len(val_loader)
     val_losses.append(avg_val_loss)
