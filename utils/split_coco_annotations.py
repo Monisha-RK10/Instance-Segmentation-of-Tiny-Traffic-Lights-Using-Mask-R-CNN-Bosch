@@ -35,12 +35,11 @@ def split_coco_json(full_data, image_names):
             new_id += 1
 
     for ann in full_data['annotations']:
-        old_id = ann['image_id']
+        old_id = ann['image_id'] # This gets the original image ID that this annotation was linked to.
         if old_id in image_id_map: # Keeps annotations linked to the kept images only.
             ann_copy = ann.copy()
-            ann_copy['image_id'] = image_id_map[old_id] # Remaps image_id to the new ID (from step 1).
-            ann_copy['id'] = ann_id # Gives each annotation a new unique id.
-            new_annotations.append(ann_copy)
+            ann_copy['image_id'] = image_id_map[old_id] # image_id_map[old_id]: This looks up what new image ID we've assigned to this old image ID earlier during filtering.      ann_copy['id'] = ann_id # Gives each annotation a new unique id.
+            new_annotations.append(ann_copy) # ann_copy['image_id']: Replacing the old image ID in this annotation with the new image ID 
             ann_id += 1
 
     return {
