@@ -27,19 +27,19 @@ def split_coco_json(full_data, image_names):
     ann_id = 0
 
     for img in full_data['images']:
-        if img['file_name'] in image_names:
+        if img['file_name'] in image_names: # Keeps only images whose filenames are in image_names.
             image_id_map[img['id']] = new_id  # old_id -> new_id
             img_copy = img.copy() # Don't mutate original
-            img_copy['id'] = new_id # Assign new image ID
-            new_images.append(img_copy)  # Save it
+            img_copy['id'] = new_id # Assign new image ID, Remaps their ids to a clean 0-based index.
+            new_images.append(img_copy)  # Save it, Stores them in new_images.
             new_id += 1
 
     for ann in full_data['annotations']:
         old_id = ann['image_id']
-        if old_id in image_id_map:
+        if old_id in image_id_map: # Keeps annotations linked to the kept images only.
             ann_copy = ann.copy()
-            ann_copy['image_id'] = image_id_map[old_id]
-            ann_copy['id'] = ann_id
+            ann_copy['image_id'] = image_id_map[old_id] # Remaps image_id to the new ID (from step 1).
+            ann_copy['id'] = ann_id # Gives each annotation a new unique id.
             new_annotations.append(ann_copy)
             ann_id += 1
 
