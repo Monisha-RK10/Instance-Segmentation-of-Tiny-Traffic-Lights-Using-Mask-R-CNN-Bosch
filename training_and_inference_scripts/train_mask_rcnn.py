@@ -51,7 +51,7 @@ model.to(device)
 # Optimizer & LR scheduler
 params = [p for p in model.parameters() if p.requires_grad]
 optimizer = torch.optim.Adam(params, lr=1e-4)
-scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=20, verbose=True)
+scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=20, verbose=True) # mode='max' for metrics like accuracy, where higher is better.
 
 # Create dataset & dataloaders
 train_dataset = COCOMaskRCNNDataset(
