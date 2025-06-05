@@ -121,7 +121,7 @@ for epoch in range(num_epochs):
     # Save best model
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
-        torch.save({
+        torch.save({                      # Checkpoint dictionary
             'epoch': epoch + 1,
             'model_state_dict': model.state_dict(), # Contains only the weights, not architecture (reconstruct the model architecture and then load the weights).
             'optimizer_state_dict': optimizer.state_dict(), # To resume training with the same momentum,
