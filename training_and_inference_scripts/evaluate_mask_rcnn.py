@@ -81,7 +81,7 @@ for idx in tqdm(range(len(val_dataset))):
         if scores[i] < 0.5:
             continue
 
-        mask = masks[i, 0] > 0.5 # Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
+        mask = masks[i, 0] > 0.5 # [num_instances, 1, H, W]. 1 is channel, not used (Mask R-CNN always predicts 1-channel masks). Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
         # changing 0.5 affects which pixels count as foreground -> affects predicted mask shape -> affects IoU -> affects COCO metrics.
         rle = mask_utils.encode(np.asfortranarray(mask.astype(np.uint8)))
         rle["counts"] = rle["counts"].decode("utf-8")
