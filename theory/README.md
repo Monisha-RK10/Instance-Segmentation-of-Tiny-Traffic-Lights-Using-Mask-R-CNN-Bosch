@@ -10,4 +10,4 @@
 | **GT Format**             | COCO polygons → merge → binary mask                            | COCO polygons → RLE (per instance)                            |
 | **Usage Goal**            | Evaluate SAM's mask quality vs GT                              | Full instance segmentation performance (mask + class + score) |
 
-Note: This project is an extension to 'Hybrid Detection and Segmentation of Small Traffic Lights using YOLOv8 and SAM', hence, the comparisonfor better understanding.
+Note: This project is an extension to 'Hybrid Detection and Segmentation of Small Traffic Lights using YOLOv8 and SAM', hence, the comparison for better understanding.
