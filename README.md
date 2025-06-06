@@ -6,7 +6,7 @@ This project is a direct extension of my earlier work:
 The project tackles the challenging task of **instance segmentation** of **small-scale traffic lights** using the Bosch Small Traffic Lights dataset. A custom Mask R-CNN pipeline is implemented to detect and segment red and green traffic lights with pixel-level precision.
 
 > **Read the full write-up on Medium**:  
-> [Instance Segmentation of Tiny Traffic Lights using Mask R-CNN](https://medium.com/@monishatemp20/instance-segmentation-of-tiny-traffic-lights-using-mask-r-cnn-bosch-dataset-f88a8d33e1e3)
+> [Instance Segmentation of Tiny Traffic Lights on Bosch Dataset Using Mask R-CNN](https://medium.com/@monishatemp20/instance-segmentation-of-tiny-traffic-lights-using-mask-r-cnn-bosch-dataset-f88a8d33e1e3)
 
 ## Project Overview
 
