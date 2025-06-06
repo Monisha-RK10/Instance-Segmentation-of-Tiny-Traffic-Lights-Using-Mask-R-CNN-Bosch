@@ -73,7 +73,7 @@ for idx in tqdm(range(len(val_dataset))):
     with torch.no_grad():
         output = model([img.to(device)])[0]
 
-    masks = output["masks"].cpu().numpy()       #  GPU to NumPy for COCO evaluation
+    masks = output["masks"].cpu().numpy()       #  GPU to NumPy for COCO evaluation,  numpy() works only on CPU tensors.
     labels = output["labels"].cpu().numpy()
     scores = output["scores"].cpu().numpy()
 
