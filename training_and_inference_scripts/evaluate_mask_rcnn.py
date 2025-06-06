@@ -4,6 +4,10 @@
 # Function 'update_category_ids', ensures that during evaluation train & val json assign 1 for red, 2 for green to match with labels in COCOMaskRCNNDataset.
 # b) Loads the pre-trained weights with model architecture.
 # c) Evaluates on val_dataset via pycocotools
+# During training, GT masks are binary (from annToMask) 
+# During inference, predicted masks are soft (masks = output["masks"].cpu().numpy())
+# Threshold the soft masks during evaluation for comparison (e.g., > 0.5) (mask = masks[i, 0] > 0.5)
+
 
 import json
 import torch
@@ -81,7 +85,7 @@ for idx in tqdm(range(len(val_dataset))):
         if scores[i] < 0.5:
             continue
 
-        mask = masks[i, 0] > 0.5 # # shape (H, W) of ith instance. [num_instances, 1, H, W]. 1 is channel, not used (Mask R-CNN always predicts 1-channel masks). Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
+        mask = masks[i, 0] > 0.5 # shape (H, W) of ith instance. [num_instances, 1, H, W]. 1 is channel, not used (Mask R-CNN always predicts 1-channel masks). Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
         # changing 0.5 affects which pixels count as foreground -> affects predicted mask shape -> affects IoU -> affects COCO metrics.
         rle = mask_utils.encode(np.asfortranarray(mask.astype(np.uint8)))
         rle["counts"] = rle["counts"].decode("utf-8")
