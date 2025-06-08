@@ -35,7 +35,7 @@ The project tackles the challenging task of **instance segmentation** of **small
 | **YOLOv8s-seg** | -          | -                 | -              |0.07        |0.203          |
 | **Mask R-CNN**  | -          | -                 | -              |**0.82**    | **0.4**       |
 
- **Mask R-CNN outperforms both YOLOv8 and SAM pipelines** for instance segmentation of tiny traffic lights.
+> **Mask R-CNN outperforms both YOLOv8 and SAM pipelines** for instance segmentation of tiny traffic lights.
 
 
 ## Sample Output Visualizations
