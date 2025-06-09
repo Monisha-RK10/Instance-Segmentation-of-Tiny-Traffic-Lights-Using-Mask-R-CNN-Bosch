@@ -17,11 +17,9 @@ Both models share the same GT annotation format, a JSON exported from Makesense.
 
 ## Convert polygon → RLE → binary mask
 
-`rle = mask_utils.frPyObjects(segmentation_poly, height, width)`
-
-`rle = mask_utils.merge(rle)`
-
-`gt_mask = mask_utils.decode(rle)  # binary mask shape (H, W)`
+> rle = mask_utils.frPyObjects(segmentation_poly, height, width)
+> rle = mask_utils.merge(rle)
+> gt_mask = mask_utils.decode(rle)  # binary mask shape (H, W)
 
 # Evaluation Flow
 
@@ -38,16 +36,16 @@ Both models share the same GT annotation format, a JSON exported from Makesense.
 
 ##  Code Snippet: Mask R-CNN
 
-`soft_mask = masks[i, 0]  # shape: (H, W)`
-`binary_mask = soft_mask > 0.25`
-`rle = mask_utils.encode(np.asfortranarray(binary_mask.astype(np.uint8)))`
-`rle["counts"] = rle["counts"].decode("utf-8")`
+> soft_mask = masks[i, 0]  # shape: (H, W)
+> binary_mask = soft_mask > 0.25
+> rle = mask_utils.encode(np.asfortranarray(binary_mask.astype(np.uint8)))
+> rle["counts"] = rle["counts"].decode("utf-8")
 
 ##  Code Snippet: SAM
 
-`masks, scores, _ = predictor.predict(...)`
-`pred_mask = masks[0]  # already binary`
-`iou = compute_iou(pred_mask, gt_mask)`
+> masks, scores, _ = predictor.predict(...)
+> pred_mask = masks[0]  # already binary
+> iou = compute_iou(pred_mask, gt_mask)
 
 If you want to extend SAM’s evaluation to full COCO metrics, you can:
 
