@@ -52,3 +52,9 @@ If you want to extend SAM’s evaluation to full COCO metrics, you can:
 - Convert SAM's pred_mask to RLE.
 - Build a prediction JSON.
 - Use pycocotools.COCOeval.
+
+
+
+ masks = output["masks"].cpu().numpy()       #  GPU to NumPy for COCO evaluation,  numpy() works only on CPU tensors.
+    labels = output["labels"].cpu().numpy()
+    scores = output["scores"].cpu().numpy()
