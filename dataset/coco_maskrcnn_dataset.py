@@ -18,7 +18,7 @@ import random
 import numpy as np
 import torch
 
-class COCOMaskRCNNDataset(torch.utils.data.Dataset):
+class COCOMaskRCNNDataset(torch.utils.data.Dataset): # COCO-style (One JSON with images + masks)
     def __init__(self, images_dir, annotation_json, transforms=None):
         self.images_dir = images_dir
         self.coco = COCO(annotation_json) # Passing annotation json via COCO (internally, indexes all images, annotations, categories, etc)
