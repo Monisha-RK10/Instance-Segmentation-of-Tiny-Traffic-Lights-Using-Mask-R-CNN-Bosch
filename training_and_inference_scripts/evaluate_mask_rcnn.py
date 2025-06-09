@@ -4,9 +4,11 @@
 # Function 'update_category_ids', ensures that during evaluation train & val json assign 1 for red, 2 for green to match with labels in COCOMaskRCNNDataset.
 # b) Loads the pre-trained weights with model architecture.
 # c) Evaluates on val_dataset via pycocotools  
-# During training, GT masks are binary (from annToMask) 
-# During inference, predicted masks are soft (masks = output["masks"].cpu().numpy())
+
+# During training: GT masks are binary (from annToMask) 
+# During inference: Predicted masks are soft (masks = output["masks"].cpu().numpy())
 # Threshold the soft masks during evaluation for comparison (e.g., > 0.5) (mask = masks[i, 0] > 0.5)
+
 # Problem: engine.py does not support segmentation masks, it only evaluates bounding boxes. Mask R-CNN gives soft masks, and for COCO evaluation (Threshold the soft mask to binary (mask > 0.5), convert to RLE)
 # Solution: use pycocotools
 
