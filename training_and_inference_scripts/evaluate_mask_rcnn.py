@@ -75,7 +75,7 @@ model.eval()
 # Evaluate on val_dataset via pycocotools
 for idx in tqdm(range(len(val_dataset))):
     img, target = val_dataset[idx]
-    image_id = int(target["image_id"].item())
+    image_id = int(target["image_id"].item())  # tensor([image_id]) is converted to plain int for pycocotools
 
     with torch.no_grad():
         output = model([img.to(device)])[0]
