@@ -34,11 +34,12 @@ gt_mask = mask_utils.decode(rle)  # binary mask shape (H, W)
 > SAM masks are already binary (bool arrays), no need for thresholding. You can optionally convert SAM predictions to RLE + build a COCO-format prediction JSON for use with COCOeval, but this is not strictly necessary.
 
 ##  Code Snippet: Mask R-CNN
-
 soft_mask = masks[i, 0]  # shape: (H, W)
 binary_mask = soft_mask > 0.25
 rle = mask_utils.encode(np.asfortranarray(binary_mask.astype(np.uint8)))
 rle["counts"] = rle["counts"].decode("utf-8")
+
+
 
 ##  Code Snippet: SAM
 
