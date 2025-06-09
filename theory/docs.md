@@ -34,6 +34,7 @@ Both models share the same GT annotation format, a JSON exported from Makesense.
 
 **Notes**
 > Mask R-CNN soft masks must be thresholded before converting to RLE. Common threshold = 0.5, but 0.25 gives higher recall (more lenient). Threshold affects predicted mask shape → IoU → mAP.
+> 
 > SAM masks are already binary (bool arrays), no need for thresholding. You can optionally convert SAM predictions to RLE + build a COCO-format prediction JSON for use with COCOeval, but this is not strictly necessary.
 
 ##  Code Snippet: Mask R-CNN
