@@ -1,4 +1,4 @@
-# Step 1: Create a custom Mask R-CNN class
+# Step 1: Create a custom Mask R-CNN class (using pycocotools as labels have json)
 # This piece of code does the following:
 # COCOMaskRCNNDataset class takes image dir, loads annotation JSON via COCO, gets a list of image IDs.
 # Loop through each image ID, get file name, open it in RGB format, & apply transform.
