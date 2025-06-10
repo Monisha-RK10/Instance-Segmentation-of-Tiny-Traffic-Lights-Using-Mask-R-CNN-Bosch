@@ -1,4 +1,4 @@
-# Mask Evaluation: SAM vs. Mask R-CNN
+# Mask Evaluation: Mask R-CNN vs. SAM vs. YOLO seg
 This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with:
 
 - Mask R-CNN (soft masks, COCOeval)
