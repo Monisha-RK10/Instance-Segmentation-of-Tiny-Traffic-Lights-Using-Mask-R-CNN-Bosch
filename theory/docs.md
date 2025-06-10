@@ -74,3 +74,12 @@ If you want to extend SAM’s evaluation to full COCO metrics, you can:
 - Convert SAM's pred_mask to RLE.
 - Build a prediction JSON.
 - Use pycocotools.COCOeval.
+
+## Comparing Mask R-CNN with SAM and YOLO seg
+
+| Model      | Pred Format              | GT Format           | Eval Style         | Special Handling                |
+| ---------- | ------------------------ | ------------------- | ------------------ | ------------------------------- |
+| YOLO Seg   | Polygon `.txt`           | Polygon `.txt`      | Auto (Ultralytics) | No pycocotools needed           |
+| SAM        | Binary Mask              | Polygon → Binary    | Manual IoU         | GT needs decode                 |
+| Mask R-CNN | Soft Mask → Binary (RLE) | Polygon (COCO JSON) | `COCOeval`         | Threshold + RLE needed for pred |
+
