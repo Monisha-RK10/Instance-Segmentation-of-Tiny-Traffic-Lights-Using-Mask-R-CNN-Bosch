@@ -116,7 +116,7 @@ for epoch in range(num_epochs):
     print(f"Epoch {epoch+1}: Train Loss = {avg_train_loss:.4f}, Val Loss = {avg_val_loss:.4f}")
 
     # Scheduler step, adjusts the learning rate dynamically based on validation loss.
-    scheduler.step(avg_val_loss)                                                                            # If val_loss doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
+    scheduler.step(avg_val_loss)                                                                   # If val_loss doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
 
     # Save best model
     if avg_val_loss < best_val_loss:
