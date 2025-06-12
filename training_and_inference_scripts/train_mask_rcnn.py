@@ -38,7 +38,7 @@ def get_mask_rcnn_model(num_classes):
     in_features_mask = model.roi_heads.mask_predictor.conv5_mask.in_channels
     hidden_layer = 256
     model.roi_heads.mask_predictor = MaskRCNNPredictor(
-        in_features_mask, hidden_layer, num_classes # Mask prediction is spatial -> CNN + upsampling → need hidden layers.
+        in_features_mask, hidden_layer, num_classes                                                 # Mask prediction is spatial -> CNN + upsampling → need hidden layers.
     )
 
     return model
@@ -51,7 +51,7 @@ model.to(device)
 # Optimizer & LR scheduler
 params = [p for p in model.parameters() if p.requires_grad]
 optimizer = torch.optim.Adam(params, lr=1e-4)
-scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=20, verbose=True) # reduces LR only when val loss stagnates, mode='max' for metrics like accuracy, where higher is better.
+scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=20, verbose=True)        # Reduces LR only when val loss stagnates, mode='max' for metrics like accuracy, where higher is better.
 
 # Create dataset & dataloaders
 train_dataset = COCOMaskRCNNDataset(
@@ -80,14 +80,14 @@ for epoch in range(num_epochs):
 
     for images, targets in tqdm(train_loader,  desc=f"Epoch {epoch+1} [Train]"):
         images = list(img.to(device) for img in images)  # Send all images to GPU/CPU
-        targets = [{k: v.to(device) for k, v in t.items()} for t in targets] # Send all annotation values to device, v is a tensor, k is a string (no .to())
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]                       # Send all annotation values to device, v is a tensor, k is a string (no .to())
 
-        loss_dict = model(images, targets)  # Forward pass -> returns a dict of losses
-        loss = sum(loss for loss in loss_dict.values()) #  Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
+        loss_dict = model(images, targets)                                                         # Forward pass -> returns a dict of losses
+        loss = sum(loss for loss in loss_dict.values())                                            #  Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
 
-        optimizer.zero_grad() # Clear gradients from previous step
-        loss.backward() # Backpropagation: compute gradients w.r.t model params
-        optimizer.step() # Optimizer updates weights using gradients
+        optimizer.zero_grad()                                                                      # Clear gradients from previous step
+        loss.backward()                                                                            # Backpropagation: compute gradients w.r.t model params
+        optimizer.step()                                                                           # Optimizer updates weights using gradients
 
         epoch_train_loss += loss.item()
 
@@ -116,7 +116,7 @@ for epoch in range(num_epochs):
     print(f"Epoch {epoch+1}: Train Loss = {avg_train_loss:.4f}, Val Loss = {avg_val_loss:.4f}")
 
     # Scheduler step, adjusts the learning rate dynamically based on validation loss.
-    scheduler.step(avg_val_loss) # If val_loss doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
+    scheduler.step(avg_val_loss)                                                                            # If val_loss doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
 
     # Save best model
     if avg_val_loss < best_val_loss:
