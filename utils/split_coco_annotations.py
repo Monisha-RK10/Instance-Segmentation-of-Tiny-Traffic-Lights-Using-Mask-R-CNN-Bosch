@@ -27,19 +27,19 @@ def split_coco_json(full_data, image_names):
     ann_id = 0
 
     for img in full_data['images']:
-        if img['file_name'] in image_names: # Keeps only images whose filenames are in image_names.
-            image_id_map[img['id']] = new_id  # Storing old ID as the key, new ID as the value, needed to update annotations, which still use the old image_id. Example image_id_map[42] = 0
-            img_copy = img.copy() # Don't mutate original
-            img_copy['id'] = new_id # Assign new image ID, Remaps their ids to a clean 0-based index.
-            new_images.append(img_copy)  # Save it, Stores them in new_images.
+        if img['file_name'] in image_names:                    # Keeps only images whose filenames are in image_names.
+            image_id_map[img['id']] = new_id                   # Storing old ID as the key, new ID as the value, needed to update annotations, which still use the old image_id. Example image_id_map[42] = 0
+            img_copy = img.copy()                              # Don't mutate original
+            img_copy['id'] = new_id                            # Assign new image ID, Remaps their ids to a clean 0-based index.
+            new_images.append(img_copy)                        # Save it, Stores them in new_images.
             new_id += 1
 
     for ann in full_data['annotations']:
-        old_id = ann['image_id'] # This gets the original image ID that this annotation was linked to.
-        if old_id in image_id_map: # Keeps annotations linked to the kept images only. Example: image_id_map = {42: 0, 43: 1}
+        old_id = ann['image_id']                               # This gets the original image ID that this annotation was linked to.
+        if old_id in image_id_map:                             # Keeps annotations linked to the kept images only. Example: image_id_map = {42: 0, 43: 1}
             ann_copy = ann.copy()
-            ann_copy['image_id'] = image_id_map[old_id] # image_id_map[old_id]: This looks up what new image ID we've assigned to this old image ID earlier during filtering.      ann_copy['id'] = ann_id # Gives each annotation a new unique id.
-            new_annotations.append(ann_copy) # ann_copy['image_id']: Replacing the old image ID in this annotation with the new image ID 
+            ann_copy['image_id'] = image_id_map[old_id]        # image_id_map[old_id]: This looks up what new image ID we've assigned to this old image ID earlier during filtering.      ann_copy['id'] = ann_id # Gives each annotation a new unique id.
+            new_annotations.append(ann_copy)                   # ann_copy['image_id']: Replacing the old image ID in this annotation with the new image ID 
             ann_id += 1
 
     return {
