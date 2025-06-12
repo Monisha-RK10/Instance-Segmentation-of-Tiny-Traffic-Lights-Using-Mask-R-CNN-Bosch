@@ -17,5 +17,5 @@ This folder contains the COCO-format annotation files used for training and vali
 Each file includes:
 - `images`: List of image metadata (filename, dimensions, etc.)
 - `annotations`: Bounding boxes, segmentation masks, and category IDs for each instance.
-- `categories`: Class mappings (1 → Red, 2 → Green).
+- `categories`: Class mappings (0 → Red, 1 → Green).
 
