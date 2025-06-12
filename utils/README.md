@@ -33,7 +33,7 @@ Process:
 - Iterates over all images
 - If an image belongs to the training or validation set:
   - Assigns a new image ID
-  - Maps old ID → new ID (image_id_map)
+  - Maps old ID → new ID (image_id_map) {Key: Old ID, Value: New ID}
 - Updates each annotation:
   - Keeps only relevant annotations using image_id_map
   - Assigns new image_id and unique id for annotation
