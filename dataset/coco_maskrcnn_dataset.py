@@ -18,20 +18,20 @@ import random
 import numpy as np
 import torch
 
-class COCOMaskRCNNDataset(torch.utils.data.Dataset): # COCO-style (One JSON with images + masks)
+class COCOMaskRCNNDataset(torch.utils.data.Dataset):                        # COCO-style (One JSON with images + masks)
     def __init__(self, images_dir, annotation_json, transforms=None):
         self.images_dir = images_dir
-        self.coco = COCO(annotation_json) # Passing annotation json via COCO (internally, indexes all images, annotations, categories, etc)
-        self.image_ids = list(self.coco.imgs.keys()) # Dictionary that returns all image_ids
+        self.coco = COCO(annotation_json)                                   # Passing annotation json via COCO (internally, indexes all images, annotations, categories, etc)
+        self.image_ids = list(self.coco.imgs.keys())                        # Dictionary that returns all image_ids
         self.transforms = transforms
 
     def __getitem__(self, idx):
         image_id = self.image_ids[idx]
-        image_info = self.coco.loadImgs(image_id)[0] # Returns image metadata (filename, size, etc.)
+        image_info = self.coco.loadImgs(image_id)[0]                         # Returns image metadata (filename, size, etc.)
         image_path = os.path.join(self.images_dir, image_info['file_name'])
         image = Image.open(image_path).convert("RGB")
 
-        ann_ids = self.coco.getAnnIds(imgIds=image_id) # Get annotation IDs for an image
+        ann_ids = self.coco.getAnnIds(imgIds=image_id)                       # Get annotation IDs for an image
         annotations = self.coco.loadAnns(ann_ids)
 
         boxes = []
@@ -41,19 +41,19 @@ class COCOMaskRCNNDataset(torch.utils.data.Dataset): # COCO-style (One JSON with
         for ann in annotations:
             xmin, ymin, width, height = ann['bbox']
             boxes.append([xmin, ymin, xmin + width, ymin + height])
-            labels.append(ann['category_id'] + 1) # Shift labels from 0/1 to 1/2 (be careful, check if json has red=1, green=2. If classes startes from 1, then dont add 1)
-            mask = self.coco.annToMask(ann) # Converts a segmentation annotation (usually in polygon format: [[x1, y1, x2, y2, ..., xn, yn]]) into a binary mask (2D NumPy array: 0s and 1s showing pixel-wise object region).
+            labels.append(ann['category_id'] + 1)                            # Shift labels from 0/1 to 1/2 (be careful, check if json has red=1, green=2. If classes startes from 1, then dont add 1)
+            mask = self.coco.annToMask(ann)                                  # Converts a segmentation annotation (usually in polygon format: [[x1, y1, x2, y2, ..., xn, yn]]) into a binary mask (2D NumPy array: 0s and 1s showing pixel-wise object region).
             masks.append(mask)
 
-        boxes = torch.as_tensor(boxes, dtype=torch.float32) # Avoids copy 
+        boxes = torch.as_tensor(boxes, dtype=torch.float32)                  # Avoids copy 
         labels = torch.as_tensor(labels, dtype=torch.int64)
         masks = torch.as_tensor(masks, dtype=torch.uint8)
 
         target = {
             "boxes": boxes,
             "labels": labels,
-            "masks": masks, # segmentation masks are binary (0 or 1).
-            "image_id": torch.tensor([image_id]), # Copies, image_id is a scalar int (e.g., 42), so wrap it with torch.tensor([image_id]) to convert it into a 1D tensor. No gradients for image_id, so requires_grad=False by default.
+            "masks": masks,                                                  # Segmentation masks are binary (0 or 1).
+            "image_id": torch.tensor([image_id]),                            # Copies, image_id is a scalar int (e.g., 42), so wrap it with torch.tensor([image_id]) to convert it into a 1D tensor. No gradients for image_id, so requires_grad=False by default.
         }
 
         if self.transforms:
