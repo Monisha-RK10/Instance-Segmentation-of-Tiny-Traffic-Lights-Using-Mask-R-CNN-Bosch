@@ -23,7 +23,9 @@ This section clarifies the key differences in prediction format, thresholding, a
 
 ### Ground Truth Format
 
-Both models share the same GT annotation format, a JSON exported from Makesense.ai in COCO format (polygons). However, GT masks must be converted to binary masks before IoU comparison:
+- Both models share the same GT annotation format, a JSON exported from Makesense.ai in COCO format (polygons). 
+- For Mask R-CNN, GT annotations were loaded via COCO `mask = self.coco.annToMask(ann)` 
+- However, GT masks must be converted to binary masks before IoU comparison:
 
 ### Convert polygon → RLE → binary mask
 
