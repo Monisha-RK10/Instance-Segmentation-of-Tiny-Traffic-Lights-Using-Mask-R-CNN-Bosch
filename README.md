@@ -3,7 +3,9 @@
 This project is a direct extension of my earlier work:
 > [Hybrid-Detection-and-Segmentation-of-Tiny-Traffic-Lights-with-YOLOv8-and-SAM ](https://github.com/Monisha-RK10/Hybrid-Detection-and-Segmentation-of-Small-Traffic-Lights-using-YOLOv8-and-SAM)
 
-The project tackles the challenging task of **instance segmentation** of **small-scale traffic lights** using the Bosch Small Traffic Lights dataset. A custom Mask R-CNN pipeline is implemented to detect and segment red and green traffic lights with pixel-level precision. The effect of different soft mask thresholds (0.25, 0.5, 0.75) on AP (Average Precision) is evaluated.
+- The project tackles the challenging task of **instance segmentation** of **small-scale traffic lights** using the Bosch Small Traffic Lights dataset.
+- A custom Mask R-CNN pipeline is implemented to detect and segment red and green traffic lights with pixel-level precision.
+- The effect of different soft mask thresholds (0.25, 0.5, 0.75) on AP (Average Precision) is evaluated.
 
 > **Read the full write-up on Medium**:  
 > [Instance Segmentation of Tiny Traffic Lights Using Mask R-CNN (Bosch)](https://medium.com/@monishatemp20/instance-segmentation-of-tiny-traffic-lights-using-mask-r-cnn-bosch-dataset-f88a8d33e1e3)
