@@ -3,8 +3,9 @@
 This folder contains utility scripts to support dataset preparation and reproducibility for Mask R-CNN training on the Bosch Small Traffic Light Dataset.
 
 ---
+## Files
 
-## seed_utils.py
+### seed_utils.py
 **`Purpose`**:
 
 Ensures reproducibility across runs by setting seeds for common libraries.
@@ -18,7 +19,7 @@ Sets seeds for:
 - torch.backends.cudnn
 - Enables deterministic operations in PyTorch (by setting cudnn.deterministic = True and cudnn.benchmark = False)
 
-## split_coco_annotations.py
+### split_coco_annotations.py
 **`Purpose`**
 
 Splits a single COCO-style annotation JSON (containing all images) into two files: one for training and one for validation.
