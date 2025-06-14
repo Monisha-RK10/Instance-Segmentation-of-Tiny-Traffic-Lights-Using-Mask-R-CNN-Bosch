@@ -22,7 +22,7 @@ This folder contains the main scripts for training and evaluating the Mask R-CNN
 ### `evaluate_mask_rcnn.py`
 - **Purpose**: Evaluates the trained model on the validation dataset using COCO metrics.
 - **Key Steps**:
-  - Normalizes label mapping: Ensures `annotation_train.json` and `annotation_val.json` use the correct class IDs (1 → Red, 2 → Green) to match model expectations.
+  - Ensures `annotation_train.json` and `annotation_val.json` use the correct class IDs (1 → Red, 2 → Green) to match model expectations.
   - Loads the trained model weights and sets the model to evaluation mode.
   - Converts the output of Mask R-CNN from soft mask to binary mask by setting different thresholds (0.25, 0.50, 0.75).
   - Binary masks from earlier are then converted to RLE and GT masks are sent for evaluation.
