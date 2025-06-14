@@ -15,7 +15,7 @@ This section clarifies the key differences in prediction format, thresholding, a
 - Mask R-CNN (soft masks, COCOeval)
 - SAM (binary masks, manual IoU)
 
-###  Prediction Format
+###  Prediction Format (Mask R-CNN vs SAM)
 
 | Model          | Output Shape               | Output Type               | Thresholding Needed?              |
 | -------------- | -------------------------- | ------------------------- | --------------------------------- |
@@ -40,13 +40,13 @@ This section clarifies the key differences in prediction format, thresholding, a
 > 
 > iou = compute_iou(pred_mask, gt_mask)
 
-### Ground Truth Format
+### Ground Truth Format (Mask R-CNN vs SAM)
 
 - Both models share the same GT annotation format, a JSON exported from Makesense.ai in COCO format (polygons). 
 - For Mask R-CNN, GT annotations were loaded via COCO `mask = self.coco.annToMask(ann)` 
 - However, GT masks must be converted to binary masks before IoU comparison:
 
-### Convert polygon → RLE → binary mask
+###  Code Snippet: Convert polygon → RLE → binary mask for ground truth
 
 > rle = mask_utils.frPyObjects(segmentation_poly, height, width)
 > 
@@ -54,7 +54,7 @@ This section clarifies the key differences in prediction format, thresholding, a
 > 
 > gt_mask = mask_utils.decode(rle)  # binary mask shape (H, W)
 
-### Evaluation Flow
+### Evaluation Flow (Mask R-CNN vs SAM)
 
 | Step                  | **Mask R-CNN**                                   | **SAM**                                      |
 | --------------------- | ------------------------------------------------ | -------------------------------------------- |
