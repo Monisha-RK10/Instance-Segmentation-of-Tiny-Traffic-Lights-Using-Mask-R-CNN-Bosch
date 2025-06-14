@@ -25,7 +25,7 @@ This folder contains the main scripts for training and evaluating the Mask R-CNN
   - Normalizes label mapping: Ensures `annotation_train.json` and `annotation_val.json` use the correct class IDs (1 → Red, 2 → Green) to match model expectations.
   - Loads the trained model weights and sets the model to evaluation mode.
   - Converts the output of MASK R-CNN from soft mask to binary mask by setting different thresholds (0.25, 0.50, 0.75).
-  - Binary masks from earlier are then converted to RLE and GT maks in Polygon format are sent for evalution.
+  - Binary masks from earlier are then converted to RLE and GT masks are sent for evalution.
   - Uses pycocotools to compute standard COCO evaluation metrics (AP, AR, etc.) on the validation dataset.
 
 ---
