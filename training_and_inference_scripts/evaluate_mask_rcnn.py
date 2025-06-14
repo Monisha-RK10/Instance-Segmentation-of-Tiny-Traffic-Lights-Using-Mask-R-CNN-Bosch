@@ -1,7 +1,8 @@
 # Step 4: Evaluation
 # This piece of code does the following:
-# a) In this setup, train & val json have 0 for red, 1 for green, i.e., "categories": [{"id": 0, "name": "Red"}, {"id": 1, "name": "Green"}]. Model was trained with 3 classes, 1 for red, 2 for green.
-# Function 'update_category_ids', ensures that during evaluation train & val json assign 1 for red, 2 for green to match with labels in COCOMaskRCNNDataset.
+# a) In this setup, train & val json have 0 for red, 1 for green, i.e., "categories": [{"id": 0, "name": "Red"}, {"id": 1, "name": "Green"}]. 
+# Model was trained with 3 classes, background + 1 for red, 2 for green.
+# Function 'update_category_ids' ensures that during evaluation, train & val json assign 1 for red, 2 for green to match with labels in COCOMaskRCNNDataset.
 # b) Loads the pre-trained weights with model architecture.
 # c) Evaluates on val_dataset via pycocotools  
 
@@ -9,7 +10,8 @@
 # During inference: Predicted masks are soft (masks = output["masks"].cpu().numpy())
 # Threshold the soft masks during evaluation for comparison (e.g., > 0.5) (mask = masks[i, 0] > 0.5)
 
-# Problem: engine.py does not support segmentation masks, it only evaluates bounding boxes. Mask R-CNN gives soft masks, and for COCO evaluation (Threshold the soft mask to binary (mask > 0.5), convert to RLE)
+# Problem: engine.py does not support segmentation masks, it only evaluates bounding boxes. 
+# Mask R-CNN gives soft masks, and for COCO evaluation need binary masks (threshold the soft mask to binary (mask > 0.5), convert to RLE)
 # Solution: use pycocotools
 
 import json
@@ -67,7 +69,7 @@ update_category_ids(val_json_path)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Initialize model with same num_classes
-model = maskrcnn_resnet50_fpn(num_classes=3)  # 1 bg + 2 classes
+model = maskrcnn_resnet50_fpn(num_classes=3)                                                             # 1 bg + 2 classes
 model.load_state_dict(torch.load("best_maskrcnn.pth")["model_state_dict"])
 model.to(device)
 model.eval()
@@ -75,12 +77,12 @@ model.eval()
 # Evaluate on val_dataset via pycocotools
 for idx in tqdm(range(len(val_dataset))):
     img, target = val_dataset[idx]
-    image_id = int(target["image_id"].item())  # tensor([image_id]) is converted to plain int for pycocotools
+    image_id = int(target["image_id"].item())                                                            # tensor([image_id]) is converted to plain int for pycocotools
 
     with torch.no_grad():
         output = model([img.to(device)])[0]
 
-    masks = output["masks"].cpu().numpy()       #  GPU to NumPy for COCO evaluation,  numpy() works only on CPU tensors.
+    masks = output["masks"].cpu().numpy()                                                                #  GPU to NumPy for COCO evaluation,  numpy() works only on CPU tensors.
     labels = output["labels"].cpu().numpy()
     scores = output["scores"].cpu().numpy()
 
@@ -88,9 +90,12 @@ for idx in tqdm(range(len(val_dataset))):
         if scores[i] < 0.5:
             continue
 
-        mask = masks[i, 0] > 0.5 # shape (H, W) of ith instance. [num_instances, 1, H, W]. 1 is channel, not used (Mask R-CNN always predicts 1-channel masks). Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
-        # changing 0.5 affects which pixels count as foreground -> affects predicted mask shape -> affects IoU -> affects COCO metrics.
-        rle = mask_utils.encode(np.asfortranarray(mask.astype(np.uint8))) # converting the binary mask (after thresholding) into RLE format for COCO evaluator
+        mask = masks[i, 0] > 0.5             
+        # Shape (H, W) of ith instance. [num_instances, 1, H, W]. 1 is channel, not used (Mask R-CNN always predicts 1-channel masks). 
+        # Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask),
+        # Changing 0.5 affects which pixels count as foreground -> affects predicted mask shape -> affects IoU -> affects COCO metrics.
+        rle = mask_utils.encode(np.asfortranarray(mask.astype(np.uint8))) 
+        # Converting the binary mask (after thresholding) into RLE format for COCO evaluator
         rle["counts"] = rle["counts"].decode("utf-8")
 
         coco_predictions.append({
@@ -103,8 +108,8 @@ for idx in tqdm(range(len(val_dataset))):
 with open("maskrcnn_preds.json", "w") as f:
     json.dump(coco_predictions, f)
 
-coco_gt = COCO("/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_val.json")   # For ground truth
-coco_dt = coco_gt.loadRes("maskrcnn_preds.json") # Predicted by the trained model     # COCO object (coco_gt) holds image and category metadata.
+coco_gt = COCO("/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_val.json")                      # For ground truth
+coco_dt = coco_gt.loadRes("maskrcnn_preds.json") # Predicted by the trained model                        # COCO object (coco_gt) holds image and category metadata.
 coco_eval = COCOeval(coco_gt, coco_dt, iouType='segm')
 coco_eval.evaluate()
 coco_eval.accumulate()
