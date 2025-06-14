@@ -96,7 +96,7 @@ for epoch in range(num_epochs):
     train_losses.append(avg_train_loss)
 
     # Validation step
-    model.eval()  # Proper eval mode to disable dropout/batchnorm.
+    model.eval()                                                                                   # Proper eval mode to disable dropout/batchnorm.
     epoch_val_loss = 0
 
     with torch.no_grad():
