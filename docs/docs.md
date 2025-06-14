@@ -21,6 +21,24 @@ This section clarifies the key differences in prediction format, thresholding, a
 | **Mask R-CNN** | `[num_instances, 1, H, W]` | Soft masks ∈ `[0.0, 1.0]` | Yes (e.g., `> 0.25` or `> 0.5`) |
 | **SAM**        | `[H, W]` (per mask)        | Binary masks (0 or 1)     | No (already thresholded)        |
 
+##  Code Snippet: Mask R-CNN
+
+> soft_mask = masks[i, 0]  # shape: (H, W)
+> 
+> binary_mask = soft_mask > 0.25
+> 
+> rle = mask_utils.encode(np.asfortranarray(binary_mask.astype(np.uint8)))
+> 
+> rle["counts"] = rle["counts"].decode("utf-8")
+
+##  Code Snippet: SAM
+
+> masks, scores, _ = predictor.predict(...)
+> 
+> pred_mask = masks[0]  # already binary
+> 
+> iou = compute_iou(pred_mask, gt_mask)
+
 ### Ground Truth Format
 
 - Both models share the same GT annotation format, a JSON exported from Makesense.ai in COCO format (polygons). 
@@ -45,27 +63,10 @@ This section clarifies the key differences in prediction format, thresholding, a
 | Evaluation method     | `pycocotools.COCOeval` (mAP, AP\@IoU thresholds) | Manual IoU between `pred_mask` and `gt_mask` |
 
 **Notes**
-> Mask R-CNN soft masks must be thresholded before converting to RLE. Common threshold = 0.5, but 0.25 gives higher recall (more lenient). Threshold affects predicted mask shape → IoU → mAP.
-> 
-> SAM masks are already binary (bool arrays), no need for thresholding. You can optionally convert SAM predictions to RLE + build a COCO-format prediction JSON for use with COCOeval, but this is not strictly necessary.
-
-##  Code Snippet: Mask R-CNN
-
-> soft_mask = masks[i, 0]  # shape: (H, W)
-> 
-> binary_mask = soft_mask > 0.25
-> 
-> rle = mask_utils.encode(np.asfortranarray(binary_mask.astype(np.uint8)))
-> 
-> rle["counts"] = rle["counts"].decode("utf-8")
-
-##  Code Snippet: SAM
-
-> masks, scores, _ = predictor.predict(...)
-> 
-> pred_mask = masks[0]  # already binary
-> 
-> iou = compute_iou(pred_mask, gt_mask)
+- Mask R-CNN: Soft masks must be thresholded before converting to RLE.
+- Mask R-CNN: Common threshold = 0.5, but 0.25 gives higher recall (more lenient). Threshold affects predicted mask shape → IoU → mAP.
+- SAM: Masks are already binary (bool arrays), no need for thresholding.
+- SAM: You can optionally convert SAM predictions to RLE + build a COCO-format prediction JSON for use with COCOeval, but this is not strictly necessary.
 
 If you want to extend SAM’s evaluation to full COCO metrics, you can:
 
