@@ -30,15 +30,15 @@ def split_coco_json(full_data, image_names):
         if img['file_name'] in image_names:                    # Keeps only images whose filenames are in image_names.
             image_id_map[img['id']] = new_id                   # Storing old ID as the key, new ID as the value. This is needed to update annotations, which still use the old image_id. Example: image_id_map[42] = 0
             img_copy = img.copy()                              # Don't mutate original
-            img_copy['id'] = new_id                            # Assign new image ID, Remaps their ids to a clean 0-based index.
+            img_copy['id'] = new_id                            # Assign new image ID, remaps their ids to a clean 0-based index.
             new_images.append(img_copy)                        # Save it, store them in new_images.
             new_id += 1
 
     for ann in full_data['annotations']:
         old_id = ann['image_id']                               # Gets the original image ID that this annotation was linked to.
-        if old_id in image_id_map:                             # Checks if the older original ID is present in image_id_map to keep annotations linked to the kept images only. Example: image_id_map = {42: 0, 43: 1}
+        if old_id in image_id_map:                             # Checks if the older original ID is present in 'image_id_map' to keep annotations linked to the kept images only. Example: image_id_map = {42: 0, 43: 1}
             ann_copy = ann.copy()
-            ann_copy['image_id'] = image_id_map[old_id]        # image_id_map[old_id]: Looks up what new image ID was assigned to the old image ID earlier during filtering. ann_copy['image_id']: Replaces the old image ID with the new image ID. 
+            ann_copy['image_id'] = image_id_map[old_id]        # image_id_map[old_id]: Looks up what new image ID was assigned to the old image ID (earlier during filtering). ann_copy['image_id']: Replaces the old image ID with the new image ID. 
             ann_copy['id'] = ann_id                            # Gives each annotation a new unique id.
             new_annotations.append(ann_copy)   
             ann_id += 1
