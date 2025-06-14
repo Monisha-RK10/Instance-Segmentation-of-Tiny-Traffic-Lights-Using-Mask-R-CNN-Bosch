@@ -1,7 +1,7 @@
 # Step 3: Train the model
 # This piece of code does the following:
 # Load pretrained weights
-# Replace heads for the custom task (classifier + mask) with number of classes.
+# Replace heads for the custom task (classifier + mask) with number of classes
 # Custom COCO dataset loader, optimizer, scheduler
 # Train-val loss tracking
 # Early stopping
