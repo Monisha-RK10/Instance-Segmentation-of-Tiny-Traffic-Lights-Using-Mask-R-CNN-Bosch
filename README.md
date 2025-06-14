@@ -27,7 +27,7 @@ The project tackles the challenging task of **instance segmentation** of **small
 > The model performs strongly on **small object segmentation**, which is critical for traffic light scenarios.
 
 ## Effect of Soft Mask Threshold on Average Precision
-<img src="results/Effect_of_Soft_Mask_Threshold.png" width="100"/>
+<img src="results/Effect_of_Soft_Mask_Threshold.png" width="500"/>
 
 From above plot, the best performance is at threshold = 0.5 overall.
 
