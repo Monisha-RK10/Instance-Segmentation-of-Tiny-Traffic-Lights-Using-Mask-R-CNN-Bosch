@@ -92,7 +92,8 @@ for idx in tqdm(range(len(val_dataset))):
             continue
 
         mask = masks[i, 0] > 0.5             
-        # Shape (H, W) of ith instance: [num_instances, 1, H, W] where 1 is channel. Channel is not used as Mask R-CNN always predicts 1-channel mask. 
+        # Shape (H, W) of ith instance: [num_instances, 1, H, W] where 1 is channel. 
+        # Channel is not used as Mask R-CNN always predicts 1-channel mask. 
         # Threshold the soft mask to binary using 0.25 (floating-point probability mask to binary mask)
         # Changing 0.5 affects which pixels count as foreground -> affects predicted mask shape -> affects IoU -> affects COCO metrics.
 
@@ -111,7 +112,7 @@ with open("maskrcnn_preds.json", "w") as f:
     json.dump(coco_predictions, f)
 
 coco_gt = COCO("/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_val.json")                      # For ground truth
-coco_dt = coco_gt.loadRes("maskrcnn_preds.json") # Predicted by the trained model                        # COCO object (coco_gt) holds image and category metadata.
+coco_dt = coco_gt.loadRes("maskrcnn_preds.json")                                                         # COCO object 'coco_gt' holds image and category metadata. coco_dt: Predicted by the trained model 
 coco_eval = COCOeval(coco_gt, coco_dt, iouType='segm')
 coco_eval.evaluate()
 coco_eval.accumulate()
