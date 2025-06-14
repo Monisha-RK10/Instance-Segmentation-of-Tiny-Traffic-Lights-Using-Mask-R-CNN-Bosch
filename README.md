@@ -26,6 +26,15 @@ The project tackles the challenging task of **instance segmentation** of **small
 
 > The model performs strongly on **small object segmentation**, which is critical for traffic light scenarios.
 
+## Effect of Soft Mask Threshold on Average Precision
+<img src="results/Effect_of_Soft_Mask_Threshold.png" width="100"/>
+
+From above plot, the best performance is at threshold = 0.5 overall.
+
+- AP@0.75 improves significantly from 0.25.
+- AP@0.50 remains strong across thresholds
+- AP drops at 0.75 threshold because the masks become too tight, missing part of the object.
+
 ## Comparison with YOLOv8 & SAM
 
 | Model           | GT Objects | Matched (IoU>0.5) | Mean IoU (SAM) | Mask AP@50 | Mask AP@50-95 |
