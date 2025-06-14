@@ -21,7 +21,7 @@ This section clarifies the key differences in prediction format, thresholding, a
 | **Mask R-CNN** | `[num_instances, 1, H, W]` | Soft masks ∈ `[0.0, 1.0]` | Yes (e.g., `> 0.25` or `> 0.5`) |
 | **SAM**        | `[H, W]` (per mask)        | Binary masks (0 or 1)     | No (already thresholded)        |
 
-##  Code Snippet: Mask R-CNN
+### Code Snippet: Mask R-CNN
 
 > soft_mask = masks[i, 0]  # shape: (H, W)
 > 
@@ -31,7 +31,7 @@ This section clarifies the key differences in prediction format, thresholding, a
 > 
 > rle["counts"] = rle["counts"].decode("utf-8")
 
-##  Code Snippet: SAM
+###  Code Snippet: SAM
 
 > masks, scores, _ = predictor.predict(...)
 > 
