@@ -1,6 +1,6 @@
 # dataset/
 
-This folder contains a custom class for training Mask R-CNN on the Bosch Small Traffic Light Dataset. It is designed to parse COCO-style annotations and generate input data for PyTorch's detection models.
+This folder contains a custom class for training Mask R-CNN on the Bosch Small Traffic Light Dataset. It is designed to parse COCO-style annotations and generate input data for PyTorch's detection/segmentation models.
 
 ---
 
