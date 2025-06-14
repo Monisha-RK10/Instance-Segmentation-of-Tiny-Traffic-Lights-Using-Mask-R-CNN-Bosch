@@ -25,5 +25,4 @@ Defines the COCOMaskRCNNDataset class, a custom PyTorch Dataset that:
 - 1 → Red Traffic Light
 - 2 → Green Traffic Light
 
-
-
+Used in: `training_and_inference_scripts/train_mask_rcnn.py`
