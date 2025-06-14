@@ -21,6 +21,7 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 # Paths
 save_path = "best_maskrcnn.pth"
+
 # Import COCOMaskRCNNDataset from dataset/coco_maskrcnn_dataset 
 from dataset.coco_maskrcnn_dataset import COCOMaskRCNNDataset
 
@@ -80,10 +81,10 @@ for epoch in range(num_epochs):
 
     for images, targets in tqdm(train_loader,  desc=f"Epoch {epoch+1} [Train]"):
         images = list(img.to(device) for img in images)  # Send all images to GPU/CPU
-        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]                       # Send all annotation values to device, v is a tensor, k is a string (no .to())
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]                       # Send all annotation values to device. v is a tensor, k is a string (no .to())
 
         loss_dict = model(images, targets)                                                         # Forward pass -> returns a dict of losses
-        loss = sum(loss for loss in loss_dict.values())                                            #  Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
+        loss = sum(loss for loss in loss_dict.values())                                            # Loss is a combination of: classification loss, box regression loss, mask segmentation loss, objectness loss, RPN loss
 
         optimizer.zero_grad()                                                                      # Clear gradients from previous step
         loss.backward()                                                                            # Backpropagation: compute gradients w.r.t model params
@@ -121,10 +122,10 @@ for epoch in range(num_epochs):
     # Save best model
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
-        torch.save({                      # Checkpoint dictionary
+        torch.save({                                                                               # Checkpoint dictionary
             'epoch': epoch + 1,
-            'model_state_dict': model.state_dict(), # Contains only the weights, not architecture (reconstruct the model architecture and then load the weights).
-            'optimizer_state_dict': optimizer.state_dict(), # To resume training with the same momentum,
+            'model_state_dict': model.state_dict(),                                                # Contains only the weights, not architecture (reconstruct the model architecture and then load the weights).
+            'optimizer_state_dict': optimizer.state_dict(),                                        # To resume training with the same momentum,
             'val_loss': avg_val_loss
         }, save_path)
         print(f" Saved Best Model (Epoch {epoch+1})")
