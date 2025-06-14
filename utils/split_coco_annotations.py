@@ -1,7 +1,7 @@
 # Step 2: COCO JSON Splitter Script
 # Splits a single COCO annotation file (with all 100 images) into separate train.json and val.json.
-# For each image: Checks if its file_name is in the train or val image folder. If yes, updates its ID (new_id), stores in image_id_map.
-# For annotations: Keeps only annotations of the selected images. Updates their image_id using image_id_map and assigns new unique ann_id.
+# For each image: Checks if its file_name is in the train or val image folder. If yes, updates its ID ('new_id'), stores it in 'image_id_map'.
+# For annotations: Keeps only annotations of the selected images. Updates their 'image_id' using 'image_id_map' and assigns new unique 'ann_id'.
 # For categories: Keeps the original categories as-is.
 
 # Paths
