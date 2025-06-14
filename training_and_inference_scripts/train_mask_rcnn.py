@@ -125,7 +125,7 @@ for epoch in range(num_epochs):
         torch.save({                                                                               # Checkpoint dictionary
             'epoch': epoch + 1,
             'model_state_dict': model.state_dict(),                                                # Contains only the weights, not architecture (reconstruct the model architecture and then load the weights).
-            'optimizer_state_dict': optimizer.state_dict(),                                        # To resume training with the same momentum,
+            'optimizer_state_dict': optimizer.state_dict(),                                        # To resume training with the same momentum
             'val_loss': avg_val_loss
         }, save_path)
         print(f" Saved Best Model (Epoch {epoch+1})")
