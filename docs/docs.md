@@ -1,6 +1,6 @@
 # Mask Evaluation
 This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with:
-----
+
 ### Comparing Mask R-CNN with SAM and YOLO seg
 
 | Model      | Pred Format              | GT Format           | Eval Style         | Special Handling                |
