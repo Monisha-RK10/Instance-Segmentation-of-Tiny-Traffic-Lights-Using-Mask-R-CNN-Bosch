@@ -36,7 +36,7 @@ Process:
   - Assigns a new image ID
   - Maps old ID → new ID (image_id_map) {Key: Old ID, Value: New ID}
 - Updates each annotation:
-  - Keeps only relevant annotations using image_id_map
+  - Keeps only relevant annotations using 'image_id_map'
   - Assigns new image_id and unique id for annotation
 
 Output:
