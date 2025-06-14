@@ -104,10 +104,10 @@ for epoch in range(num_epochs):
             images = list(img.to(device) for img in images)
             targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
-            model.train()  # TEMPORARILY switch for loss computation
+            model.train()                                                                          # TEMPORARILY switch for loss computation
             loss_dict = model(images, targets)
             loss = sum(loss for loss in loss_dict.values())
-            model.eval()  # Switch back to eval to keep behavior consistent
+            model.eval()                                                                           # Switch back to eval to keep behavior consistent
 
             epoch_val_loss += loss.item()
 
@@ -117,7 +117,7 @@ for epoch in range(num_epochs):
     print(f"Epoch {epoch+1}: Train Loss = {avg_train_loss:.4f}, Val Loss = {avg_val_loss:.4f}")
 
     # Scheduler step, adjusts the learning rate dynamically based on validation loss.
-    scheduler.step(avg_val_loss)                                                                   # If val_loss doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
+    scheduler.step(avg_val_loss)                                                                   # If 'val_loss' doesn’t improve for 20 epochs (patience=20), reduce the LR by half (factor=0.5).
 
     # Save best model
     if avg_val_loss < best_val_loss:
