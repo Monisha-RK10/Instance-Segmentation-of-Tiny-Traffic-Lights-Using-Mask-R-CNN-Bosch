@@ -1,6 +1,6 @@
-# Mask Evaluation: Mask R-CNN vs. SAM vs. YOLO seg
+# Mask Evaluation
 This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with:
-
+----
 ### Comparing Mask R-CNN with SAM and YOLO seg
 
 | Model      | Pred Format              | GT Format           | Eval Style         | Special Handling                |
@@ -9,6 +9,7 @@ This section clarifies the key differences in prediction format, thresholding, a
 | SAM        | Binary Mask              | Polygon → Binary    | Manual IoU         | GT needs decode                 |
 | Mask R-CNN | Soft Mask → Binary (RLE) | Polygon (COCO JSON) -> Binary | `COCOeval`| Threshold + RLE needed for pred |
 
+----
 
 ### Mask R-CNN vs SAM
 - Mask R-CNN (soft masks, COCOeval)
@@ -74,4 +75,4 @@ If you want to extend SAM’s evaluation to full COCO metrics, you can:
 - Build a prediction JSON.
 - Use pycocotools.COCOeval.
 
-
+---
