@@ -46,7 +46,7 @@ def get_mask_rcnn_model(num_classes):
 
 # Setup
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = get_mask_rcnn_model(num_classes=3)  # Background, Red, Green
+model = get_mask_rcnn_model(num_classes=3)                                                         # Background, Red, Green
 model.to(device)
 
 # Optimizer & LR scheduler
