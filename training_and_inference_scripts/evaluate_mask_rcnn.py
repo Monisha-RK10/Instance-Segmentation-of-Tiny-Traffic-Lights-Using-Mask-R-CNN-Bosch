@@ -103,8 +103,8 @@ for idx in tqdm(range(len(val_dataset))):
 with open("maskrcnn_preds.json", "w") as f:
     json.dump(coco_predictions, f)
 
-coco_gt = COCO("/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_val.json") # For ground truth
-coco_dt = coco_gt.loadRes("maskrcnn_preds.json") # Predicted by the trained model
+coco_gt = COCO("/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_val.json")   # For ground truth
+coco_dt = coco_gt.loadRes("maskrcnn_preds.json") # Predicted by the trained model     # COCO object (coco_gt) holds image and category metadata.
 coco_eval = COCOeval(coco_gt, coco_dt, iouType='segm')
 coco_eval.evaluate()
 coco_eval.accumulate()
