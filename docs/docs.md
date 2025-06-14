@@ -1,35 +1,31 @@
 # Mask Evaluation: Mask R-CNN vs. SAM vs. YOLO seg
 This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with:
 
+### Comparing Mask R-CNN with SAM and YOLO seg
+
+| Model      | Pred Format              | GT Format           | Eval Style         | Special Handling                |
+| ---------- | ------------------------ | ------------------- | ------------------ | ------------------------------- |
+| YOLO Seg   | Polygon `.txt`           | Polygon `.txt`      | Auto (Ultralytics) | No pycocotools needed           |
+| SAM        | Binary Mask              | Polygon → Binary    | Manual IoU         | GT needs decode                 |
+| Mask R-CNN | Soft Mask → Binary (RLE) | Polygon (COCO JSON) -> Binary | `COCOeval`| Threshold + RLE needed for pred |
+
+
+### Mask R-CNN vs SAM
 - Mask R-CNN (soft masks, COCOeval)
 - SAM (binary masks, manual IoU)
 
-| Aspect                    | **SAM (Segment Anything Model)**                               | **Mask R-CNN**                                                |
-| ------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------- |
-| **Segmentation Type**     | Class-agnostic / Point/Box-guided                              | Category-aware instance segmentation                          |
-| **Prediction per Object** | One binary mask from SAM for each box or point                 | One soft mask per detected instance (then thresholded)        |
-| **Category Info**         | Not included by default                                        | Included (`category_id`, `score`)                             |
-| **Mask Format**           | Binary numpy mask (bool or 0/1)                                | Soft mask (0–1 float), thresholded & converted to **RLE**     |
-| **Evaluation**            | Manual IoU with GT masks (from polygons → merged RLE → binary) | Standard **COCOeval** using `pycocotools`                     |
-| **GT Format**             | COCO polygons → merge → binary mask                            | COCO polygons → RLE (per instance)                            |
-| **Usage Goal**            | Evaluate SAM's mask quality vs GT                              | Full instance segmentation performance (mask + class + score) |
-
->Note: This project is an extension to 'Hybrid Detection and Segmentation of Small Traffic Lights using YOLOv8 and SAM', hence, the comparison for better understanding.
-
-
-
-#  Prediction Format
+###  Prediction Format
 
 | Model          | Output Shape               | Output Type               | Thresholding Needed?              |
 | -------------- | -------------------------- | ------------------------- | --------------------------------- |
 | **Mask R-CNN** | `[num_instances, 1, H, W]` | Soft masks ∈ `[0.0, 1.0]` | Yes (e.g., `> 0.25` or `> 0.5`) |
 | **SAM**        | `[H, W]` (per mask)        | Binary masks (0 or 1)     | No (already thresholded)        |
 
-# Ground Truth Format
+### Ground Truth Format
 
 Both models share the same GT annotation format, a JSON exported from Makesense.ai in COCO format (polygons). However, GT masks must be converted to binary masks before IoU comparison:
 
-## Convert polygon → RLE → binary mask
+### Convert polygon → RLE → binary mask
 
 > rle = mask_utils.frPyObjects(segmentation_poly, height, width)
 > 
@@ -37,7 +33,7 @@ Both models share the same GT annotation format, a JSON exported from Makesense.
 > 
 > gt_mask = mask_utils.decode(rle)  # binary mask shape (H, W)
 
-# Evaluation Flow
+### Evaluation Flow
 
 | Step                  | **Mask R-CNN**                                   | **SAM**                                      |
 | --------------------- | ------------------------------------------------ | -------------------------------------------- |
@@ -75,11 +71,4 @@ If you want to extend SAM’s evaluation to full COCO metrics, you can:
 - Build a prediction JSON.
 - Use pycocotools.COCOeval.
 
-## Comparing Mask R-CNN with SAM and YOLO seg
-
-| Model      | Pred Format              | GT Format           | Eval Style         | Special Handling                |
-| ---------- | ------------------------ | ------------------- | ------------------ | ------------------------------- |
-| YOLO Seg   | Polygon `.txt`           | Polygon `.txt`      | Auto (Ultralytics) | No pycocotools needed           |
-| SAM        | Binary Mask              | Polygon → Binary    | Manual IoU         | GT needs decode                 |
-| Mask R-CNN | Soft Mask → Binary (RLE) | Polygon (COCO JSON) | `COCOeval`         | Threshold + RLE needed for pred |
 
