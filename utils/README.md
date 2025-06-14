@@ -5,12 +5,12 @@ This folder contains utility scripts to support dataset preparation and reproduc
 ---
 ## Files
 
-### seed_utils.py
-**`Purpose`**:
+### `seed_utils.py`
+**Purpose**:
 
 Ensures reproducibility across runs by setting seeds for common libraries.
 
-**`Features`**
+**Features**
 
 Sets seeds for:
 - random (Python)
@@ -19,12 +19,12 @@ Sets seeds for:
 - torch.backends.cudnn
 - Enables deterministic operations in PyTorch (by setting cudnn.deterministic = True and cudnn.benchmark = False)
 
-### split_coco_annotations.py
-**`Purpose`**
+### `split_coco_annotations.py`
+**Purpose**
 
 Splits a single COCO-style annotation JSON (containing all images) into two files: one for training and one for validation.
 
-**`Functionality`**
+**Functionality**
 
 Input:
 - Original COCO JSON (with all image and annotation entries)
