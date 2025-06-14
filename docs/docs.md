@@ -1,5 +1,5 @@
 # Mask Evaluation
-This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with:
+This section clarifies the key differences in prediction format, thresholding, and evaluation pipeline when working with different segmentation models:
 
 ### Comparing Mask R-CNN with SAM and YOLO seg
 
