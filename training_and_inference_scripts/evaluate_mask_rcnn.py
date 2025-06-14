@@ -12,7 +12,7 @@
 # Threshold the soft masks to convert them into binary during evaluation for comparison (e.g., > 0.5) (mask = masks[i, 0] > 0.5)
 
 # Problem: engine.py does not support segmentation masks, it only evaluates bounding boxes. 
-# Mask R-CNN gives soft masks, and for COCO evaluation need binary masks (thresholding the soft mask and converting to RLE)
+# Mask R-CNN gives soft masks and COCO evaluation need binary masks (thresholding the soft mask and converting to RLE)
 # Solution: use pycocotools
 
 import json
