@@ -32,7 +32,7 @@ def get_mask_rcnn_model(num_classes):
     # Replace the classifier head
     in_features_cls = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(
-        in_features_cls, num_classes # Box classification is scalar -> linear layer
+        in_features_cls, num_classes                                                                # Box classification is scalar -> linear layer
     )
 
     # Replace the mask predictor head
