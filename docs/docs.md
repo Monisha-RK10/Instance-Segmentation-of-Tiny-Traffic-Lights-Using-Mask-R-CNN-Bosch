@@ -64,15 +64,12 @@ This section clarifies the key differences in prediction format, thresholding, a
 | Evaluation method     | `pycocotools.COCOeval` (mAP, AP\@IoU thresholds) | Manual IoU between `pred_mask` and `gt_mask` |
 
 **Notes**
-- Mask R-CNN: Soft masks must be thresholded before converting to RLE.
 - Mask R-CNN: Common threshold = 0.5, but 0.25 gives higher recall (more lenient). Threshold affects predicted mask shape → IoU → mAP.
-- SAM: Masks are already binary (bool arrays), no need for thresholding.
-- SAM: You can optionally convert SAM predictions to RLE + build a COCO-format prediction JSON for use with COCOeval, but this is not strictly necessary.
 
 If you want to extend SAM’s evaluation to full COCO metrics, you can:
 
 - Convert SAM's pred_mask to RLE.
-- Build a prediction JSON.
+- Build a COCO-format prediction JSON.
 - Use pycocotools.COCOeval.
 
 ---
