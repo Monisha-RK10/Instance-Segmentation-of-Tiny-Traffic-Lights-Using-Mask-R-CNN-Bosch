@@ -58,7 +58,7 @@ scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=20, ve
 train_dataset = COCOMaskRCNNDataset(
     images_dir='/content/drive/MyDrive/MASK-RCNN_TrafficLight/images/train',
     annotation_json='/content/drive/MyDrive/MASK-RCNN_TrafficLight/annotation_train.json',
-    transforms=T.ToTensor()  # Or custom Compose
+    transforms=T.ToTensor()                                                                        # Or custom Compose
 )
 val_dataset = COCOMaskRCNNDataset(
     images_dir='/content/drive/MyDrive/MASK-RCNN_TrafficLight/images/val',
