@@ -49,7 +49,7 @@ From above plot, the best performance is at threshold = 0.5 overall.
 > **Mask R-CNN outperforms both YOLOv8 and SAM pipelines** for instance segmentation of tiny traffic lights.
 
 
-## Sample Output Visualizations
+## Sample Segmentation Output Visualizations
 
 <img src="results/img_009.png" width="1000"/>
 <img src="results/img_013.png" width="1000"/>
