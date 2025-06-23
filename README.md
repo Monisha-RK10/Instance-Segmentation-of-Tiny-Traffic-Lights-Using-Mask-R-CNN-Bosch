@@ -60,7 +60,8 @@ From above plot, the best performance is at threshold = 0.5 overall.
 ## Author
 
 **Monisha**  
-Connect via [Medium](https://medium.com/@monishatemp20)  
+Connect via 
+[Medium](https://medium.com/@monishatemp20)  
 [Linkedin](https://www.linkedin.com/in/monisha-rao-28129676/)
 
 ---
